@@ -1,3 +1,4 @@
+/*
 console.log(document.body);
 console.log(document.all);
 console.log(document.head);
@@ -50,3 +51,28 @@ newItem_className.style.fontWeight = "bold";
 newItem_className.style.textAlign = "left";
 newItem_className.style.padding = "10px 15px";
 newItem_className.style.border = "1px solid #dbdbdb";
+*/
+
+//Next Task from here using querySelectorAll();
+/**
+ *Deliverable using querySelector:- 
+  1.Make the 2nd item have green background color
+  2.Make the 3rd item invisible
+ 
+  Using QuerySelectorALL:-
+  1.Change the font color to green for 2nd item in the item list.
+  2.Choose all the odd elements and make their background green.
+ */
+const secondItem = document.querySelector("#items li:nth-child(2)");
+secondItem.style.backgroundColor = "#7ddb7d";
+
+const thirdItem = document.querySelector("#items li:nth-child(3)");
+thirdItem.style.display = "none";
+
+const li = document.querySelectorAll("li");
+li[1].style.color = "#018901";
+
+const oddItems = document.querySelectorAll("#items li:nth-child(odd)");
+oddItems.forEach((item) => {
+  item.style.backgroundColor = "green";
+});
