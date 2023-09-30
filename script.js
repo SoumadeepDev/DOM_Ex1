@@ -17,7 +17,9 @@ items[1].textContent = "Hello 2 ";
 
 for (var i = 0; i < items.length; i++) {
   items[i].style.backgroundColor = "#f4f4f4";
+  items[i].style.fontWeight = "bold";
 }
+items[2].style.backgroundColor = "rgb(0,200,0)";
 
 var AddItems = document.querySelector(".container #main .title");
 AddItems.style.fontWeight = "900";
