@@ -62,7 +62,7 @@ newItem_className.style.border = "1px solid #dbdbdb";
   Using QuerySelectorALL:-
   1.Change the font color to green for 2nd item in the item list.
   2.Choose all the odd elements and make their background green.
- */
+
 const secondItem = document.querySelector("#items li:nth-child(2)");
 secondItem.style.backgroundColor = "#7ddb7d";
 
@@ -76,3 +76,91 @@ const oddItems = document.querySelectorAll("#items li:nth-child(odd)");
 oddItems.forEach((item) => {
   item.style.backgroundColor = "green";
 });
+*/
+//New Tasks :
+/*
+manipulate the DOM using the following words...
+
+parentElement
+lastelementchild
+lastchild
+createchild
+firstelementchild
+firstchild
+nextsibling
+nextelementsibling
+previoussibling
+previouselementsibling
+createelement
+setAttribute
+createtesxtnode
+appendchild
+
+1.add HEllo word before Item Lister
+2.add HEllo word before Item 1
+
+*/
+//Traversing The DOM
+//ParentNode
+// const itemList = document.querySelector("#items");
+// console.log(itemList.parentNode);
+// itemList.parentNode.style.backgroundColor = "#f4f4f4";
+// console.log(itemList.parentNode.parentNode);
+
+//ParentElement
+var itemList = document.querySelector("#items");
+
+console.log(itemList.parentElement);
+itemList.parentElement.style.backgroundColor = "#f4f4f4";
+console.log(itemList.parentElement.parentElement);
+
+//childNodes && children
+console.log(itemList.childNodes);
+console.log(itemList.children);
+console.log(itemList.children[1]);
+itemList.children[1].style.backgroundColor = "yellow";
+
+//FirstChild
+console.log(itemList.firstChild); // This will return the first Node either element or Node or whiteSpace or anything
+//FirstElementChild
+console.log(itemList.firstElementChild); // This will return only element
+itemList.firstElementChild.textContent = "Item 1";
+//LastElementChild
+console.log(itemList.lastChild);
+console.log(itemList.lastElementChild.textContent);
+itemList.lastElementChild.textContent = "Hello 5";
+
+//nextSibling
+console.log(itemList.nextSibling);
+console.log(itemList.nextElementSibling);
+//PreviousSibling && PreviousElementSibling
+console.log(itemList.previousSibling);
+console.log(itemList.previousElementSibling);
+itemList.previousElementSibling.style.color = "Blue";
+
+//create  a div
+var newDiv = document.createElement("div");
+//add class
+newDiv.className = "hello-class";
+//add Id
+newDiv.id = "hello-id";
+//add attribute
+newDiv.setAttribute("title", "Hello div");
+//create a text node
+var newDiv_Text = document.createTextNode("Hello World");
+newDiv.appendChild(newDiv_Text);
+console.log(newDiv);
+
+//Task -1 : add HEllo word before Item Lister
+const header = document.getElementById("header-title");
+header.textContent = "HEllo " + header.innerText;
+//If we use something like `textContent`, the `<span>` section will also be included. If we use `innerHTML`, all the elements, nodes, and objects will be included, so we need to choose wisely.
+
+//Task-2: Now go head and add HEllo word before Item 1
+const newFirstItem = document.createElement("li");
+newFirstItem.className = "list-group-item";
+newFirstItem.innerText = "HEllo";
+
+const firstChild = document.querySelector("li:nth-child(1)");
+
+firstChild.parentNode.insertBefore(newFirstItem, firstChild);
