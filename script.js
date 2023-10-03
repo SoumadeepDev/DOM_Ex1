@@ -1,4 +1,3 @@
-/*
 console.log(document.body);
 console.log(document.all);
 console.log(document.head);
@@ -14,7 +13,7 @@ header.style.borderBottom = "solid 2px #000";
 
 var items = document.getElementsByClassName("list-group-item");
 console.log(items);
-items[1].textContent = "Hello 2 ";
+// items[1].textContent = "Hello 2 ";
 
 for (var i = 0; i < items.length; i++) {
   items[i].style.backgroundColor = "#f4f4f4";
@@ -28,30 +27,29 @@ AddItems.style.color = "rgb(0, 200, 0)";
 
 //new task from here ...
 
-// Creating a new element with different className
-const newItem = document.createElement("li");
-newItem.innerHTML = "New Item";
-newItem.className = "list-newItem";
+// // Creating a new element with different className
+// const newItem = document.createElement("li");
+// newItem.innerHTML = "New Item";
+// newItem.className = "list-newItem";
 
 // Remove dot style from newItem
-newItem.style.listStyleType = "none";
-newItem.style.paddingLeft = "0";
-newItem.style.marginLeft = "0";
-newItem.style.borderLeft = "none";
-newItem.style.borderRadius = "0";
+// newItem.style.listStyleType = "none";
+// newItem.style.paddingLeft = "0";
+// newItem.style.marginLeft = "0";
+// newItem.style.borderLeft = "none";
+// newItem.style.borderRadius = "0";
 
-const ul = document.getElementsByTagName("ul")[0]; //because this returns an array so we use first index to access it
-ul.appendChild(newItem);
+// const ul = document.getElementsByTagName("ul")[0]; //because this returns an array so we use first index to access it
+// ul.appendChild(newItem);
 
-newItem_className = document.getElementsByClassName("list-newItem")[0];
+// newItem_className = document.getElementsByClassName("list-newItem")[0];
 
-// Add the same styles to the newItem as other li elements
-newItem_className.style.backgroundColor = "#f4f4f4";
-newItem_className.style.fontWeight = "bold";
-newItem_className.style.textAlign = "left";
-newItem_className.style.padding = "10px 15px";
-newItem_className.style.border = "1px solid #dbdbdb";
-*/
+// // Add the same styles to the newItem as other li elements
+// newItem_className.style.backgroundColor = "#f4f4f4";
+// newItem_className.style.fontWeight = "bold";
+// newItem_className.style.textAlign = "left";
+// newItem_className.style.padding = "10px 15px";
+// newItem_className.style.border = "1px solid #dbdbdb";
 
 //Next Task from here using querySelectorAll();
 /**
@@ -152,8 +150,8 @@ newDiv.appendChild(newDiv_Text);
 console.log(newDiv);
 
 //Task -1 : add HEllo word before Item Lister
-const header = document.getElementById("header-title");
-header.textContent = "HEllo " + header.innerText;
+const header_word = document.getElementById("header-title");
+header_word.textContent = "HEllo " + header.innerText;
 //If we use something like `textContent`, the `<span>` section will also be included. If we use `innerHTML`, all the elements, nodes, and objects will be included, so we need to choose wisely.
 
 //Task-2: Now go head and add HEllo word before Item 1
@@ -190,20 +188,31 @@ const form = document.getElementById("addForm");
 form.addEventListener("submit", addItem);
 
 //Add Item
+// Add Item
 function addItem(e) {
   e.preventDefault();
 
-  //get input value
-  var newItem = document.getElementById("item").value;
-  //create new li element
+  // Get input value
+  var newItemText = document.getElementById("item").value;
+
+  if (!newItemText) {
+    alert("Please enter an item.");
+    return;
+  }
+
+  // Create new li element
   var li = document.createElement("li");
-  //add class
+  // Add class
   li.className = "list-group-item";
-  //add textnode with input value
-  li.appendChild(document.createTextNode(newItem));
-  li.appendChild(button);
+  // Add textnode with input value
+  li.appendChild(document.createTextNode(newItemText));
+  li.appendChild(div);
   itemList.appendChild(li);
+
+  // Clear the input text field
+  document.getElementById("item").value = "";
 }
+
 //delete event
 itemList.addEventListener("click", removeItem);
 //function removeItem
