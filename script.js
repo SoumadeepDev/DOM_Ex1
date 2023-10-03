@@ -188,15 +188,19 @@ const form = document.getElementById("addForm");
 form.addEventListener("submit", addItem);
 
 //Add Item
-// Add Item
 function addItem(e) {
   e.preventDefault();
 
-  // Get input value
+  // Get input values
   var newItemText = document.getElementById("item").value;
+  var newItemDescription = document.getElementById("description").value;
 
   if (!newItemText) {
     alert("Please enter an item.");
+    return;
+  }
+  if (!newItemDescription) {
+    alert("Please enter item description.");
     return;
   }
 
@@ -204,13 +208,55 @@ function addItem(e) {
   var li = document.createElement("li");
   // Add class
   li.className = "list-group-item";
-  // Add textnode with input value
-  li.appendChild(document.createTextNode(newItemText));
+  li.style.backgroundColor = "#f4f4f4";
+
+  // Create a div for the item text
+  var itemTextDiv = document.createElement("div");
+  // Adding styles
+  itemTextDiv.style.fontWeight = "bold";
+  itemTextDiv.style.display = "inline-block";
+  itemTextDiv.appendChild(document.createTextNode(newItemText));
+
+  // Create a div for the description text
+  var descriptionDiv = document.createElement("div");
+  // Adding styles
+  descriptionDiv.style.fontWeight = "bold";
+  descriptionDiv.style.display = "inline-block";
+  descriptionDiv.appendChild(document.createTextNode(newItemDescription));
+
+  // Create the button div
+  var div = document.createElement("div");
+  div.className = "btn-group float-right";
+
+  // Create the edit button
+  var button_edit = document.createElement("button");
+  button_edit.className = "btn btn-info btn-sm edit";
+  button_edit.style.marginRight = "5px";
+  button_edit.style.borderRadius = "5px";
+  button_edit.innerText = "Edit";
+
+  // Create the delete button
+  var button_del = document.createElement("button");
+  button_del.className = "btn btn-danger btn-sm delete";
+  button_del.style.borderRadius = "5px";
+  button_del.innerText = "X";
+
+  // Append the buttons to the button div
+  div.appendChild(button_edit);
+  div.appendChild(button_del);
+
+  // Append the item text div, description div, and button div to the li element
+  li.appendChild(itemTextDiv);
+  li.appendChild(document.createTextNode(" ")); // Add a space between item and description
+  li.appendChild(descriptionDiv);
   li.appendChild(div);
+
+  // Append the li element to the itemList
   itemList.appendChild(li);
 
-  // Clear the input text field
+  // Clear the input text fields
   document.getElementById("item").value = "";
+  document.getElementById("description").value = "";
 }
 
 //delete event
@@ -236,8 +282,14 @@ function filterItems(e) {
   var li_items = document.getElementsByTagName("li");
   //convert all the lis to array
   Array.from(li_items).forEach((item) => {
-    var itemName = item.firstChild.textContent;
-    if (itemName.toLowerCase().indexOf(text) != -1) {
+    var itemName = item.firstChild.textContent.toLowerCase();
+    var itemDescription =
+      item.lastChild.previousSibling.textContent.toLowerCase();
+
+    if (
+      itemName.toLowerCase().indexOf(text) != -1 ||
+      itemDescription.indexOf(text) !== -1
+    ) {
       item.style.display = "block";
     } else {
       item.style.display = "none";
