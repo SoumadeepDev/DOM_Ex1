@@ -147,7 +147,7 @@ newDiv.setAttribute("title", "Hello div");
 //create a text node
 var newDiv_Text = document.createTextNode("Hello World");
 newDiv.appendChild(newDiv_Text);
-console.log(newDiv);
+// console.log(newDiv);
 
 //Task -1 : add HEllo word before Item Lister
 const header_word = document.getElementById("header-title");
@@ -223,4 +223,24 @@ function removeItem(e) {
       itemList.removeChild(li_item);
     }
   }
+}
+
+//New TASKS FROM HERE.....
+//Filter Event
+document.getElementById("filter").addEventListener("keyup", filterItems);
+//Filter Items
+function filterItems(e) {
+  //convert entered text to lowerCase
+  var text = e.target.value.toLowerCase();
+  //get lis
+  var li_items = document.getElementsByTagName("li");
+  //convert all the lis to array
+  Array.from(li_items).forEach((item) => {
+    var itemName = item.firstChild.textContent;
+    if (itemName.toLowerCase().indexOf(text) != -1) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+  });
 }
