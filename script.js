@@ -124,11 +124,11 @@ itemList.children[1].style.backgroundColor = "yellow";
 console.log(itemList.firstChild); // This will return the first Node either element or Node or whiteSpace or anything
 //FirstElementChild
 console.log(itemList.firstElementChild); // This will return only element
-itemList.firstElementChild.textContent = "Item 1";
+// itemList.firstElementChild.textContent = "Item 1";
 //LastElementChild
 console.log(itemList.lastChild);
 console.log(itemList.lastElementChild.textContent);
-itemList.lastElementChild.textContent = "Hello 5";
+// itemList.lastElementChild.textContent = "Hello 5";
 
 //nextSibling
 console.log(itemList.nextSibling);
@@ -161,6 +161,57 @@ const newFirstItem = document.createElement("li");
 newFirstItem.className = "list-group-item";
 newFirstItem.innerText = "HEllo";
 
+//New Task From Here...
+//creating a div
+const div = document.createElement("div");
+div.className = "btn-group float-right";
+
+//creating an edit button
+const button_edit = document.createElement("button");
+button_edit.className = "btn btn-info btn-sm edit";
+button_edit.style = "margin-right: 5px; border-radius: 5px";
+button_edit.innerText = "Edit";
+//creating a delete button
+const button_del = document.createElement("button");
+button_del.className = "btn btn-danger btn-sm delete";
+button_del.style = "border-radius: 5px";
+button_del.innerText = "X";
+
+div.appendChild(button_edit);
+div.appendChild(button_del);
+newFirstItem.append(div);
+
 const firstChild = document.querySelector("li:nth-child(1)");
 
 firstChild.parentNode.insertBefore(newFirstItem, firstChild);
+
+const form = document.getElementById("addForm");
+//Form Submit Event
+form.addEventListener("submit", addItem);
+
+//Add Item
+function addItem(e) {
+  e.preventDefault();
+
+  //get input value
+  var newItem = document.getElementById("item").value;
+  //create new li element
+  var li = document.createElement("li");
+  //add class
+  li.className = "list-group-item";
+  //add textnode with input value
+  li.appendChild(document.createTextNode(newItem));
+  li.appendChild(button);
+  itemList.appendChild(li);
+}
+//delete event
+itemList.addEventListener("click", removeItem);
+//function removeItem
+function removeItem(e) {
+  if (e.target.classList.contains("delete")) {
+    if (confirm("Are You Sure?")) {
+      var li_item = e.target.parentElement.parentElement;
+      itemList.removeChild(li_item);
+    }
+  }
+}
